@@ -2,10 +2,7 @@ package dev.maxischiavello.football_stats.tournament;
 
 import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.team.Team;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -14,10 +11,12 @@ import java.util.List;
 public class Tournament {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @OneToMany
     private List<Team> teams;
+    @OneToMany
     private List<Match> matches;
 
     public Tournament() {

@@ -1,18 +1,19 @@
 package dev.maxischiavello.football_stats.substitution;
 
 import dev.maxischiavello.football_stats.player.Player;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "substitutions")
 public class Substitution {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "player_out_id")
     private Player playerOut;
+    @ManyToOne
+    @JoinColumn(name = "player_in_id")
     private Player playerIn;
     private Integer minute;
 

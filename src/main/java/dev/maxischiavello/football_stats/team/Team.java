@@ -11,17 +11,18 @@ import java.util.List;
 public class Team {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "team")
     private List<Player> players;
     private Match match;
     private Integer points;
     private Integer goalsScored;
     private Integer goalsConceded;
 
-    public Team() {}
+    public Team() {
+    }
 
     public Team(Integer id, String name, List<Player> players, Match match, Integer points, Integer goalsScored, Integer goalsConceded) {
         this.id = id;

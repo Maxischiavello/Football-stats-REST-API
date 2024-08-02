@@ -1,20 +1,20 @@
 package dev.maxischiavello.football_stats.game_actions;
 
 import dev.maxischiavello.football_stats.player.Player;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "game_actions")
 public class GameAction {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer minute;
+    @Enumerated(EnumType.STRING)
     private Action action;
+    @ManyToOne
+    @JoinColumn(name = "player_id")
     private Player player;
 
     public GameAction() {

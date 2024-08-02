@@ -3,10 +3,7 @@ package dev.maxischiavello.football_stats.match;
 import dev.maxischiavello.football_stats.player.Player;
 import dev.maxischiavello.football_stats.result.Result;
 import dev.maxischiavello.football_stats.substitution.Substitution;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,12 +13,19 @@ import java.util.List;
 public class Match {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "result_id", referencedColumnName = "id")
     private Result result;
+    @Temporal(TemporalType.DATE)
     private Date date;
+    @OneToMany
     private List<Player> startingPlayers;
+    @OneToMany
     private List<Player> substitutePlayers;
+    @OneToMany(mappedBy = "match")
     private List<Substitution> substitutions;
 
     public Match() {

@@ -1,21 +1,21 @@
 package dev.maxischiavello.football_stats.player;
 
 import dev.maxischiavello.football_stats.team.Team;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "players")
 public class Player {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String surname;
     private Integer age;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
     private Team team;
     private Integer goals;
     private Integer assists;

@@ -1,10 +1,7 @@
 package dev.maxischiavello.football_stats.result;
 
 import dev.maxischiavello.football_stats.game_actions.GameAction;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -13,10 +10,11 @@ import java.util.List;
 public class Result {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer localTeamScores;
     private Integer visitTeamScores;
+    @OneToMany(mappedBy = "result")
     private List<GameAction> gameActions;
 
     public Result() {
