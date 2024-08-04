@@ -4,31 +4,43 @@ import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.player.Player;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "team")
 public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
+
     @OneToMany(mappedBy = "team")
-    private List<Player> players;
-    private Match match;
+    private List<Player> players = new ArrayList<>();
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "team_id")
+    private List<Match> matches = new ArrayList<>();
+
     private Integer points;
+
+    @Column(name = "goals_scored")
     private Integer goalsScored;
+
+    @Column(name = "goals_conceded")
     private Integer goalsConceded;
 
     public Team() {
     }
 
-    public Team(Integer id, String name, List<Player> players, Match match, Integer points, Integer goalsScored, Integer goalsConceded) {
+    public Team(Integer id, String name, List<Player> players, List<Match> matches, Integer points, Integer goalsScored, Integer goalsConceded) {
         this.id = id;
         this.name = name;
         this.players = players;
-        this.match = match;
+        this.matches = matches;
         this.points = points;
         this.goalsScored = goalsScored;
         this.goalsConceded = goalsConceded;
@@ -58,12 +70,12 @@ public class Team {
         this.players = players;
     }
 
-    public Match getMatch() {
-        return match;
+    public List<Match> getMatches() {
+        return matches;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
     public Integer getPoints() {
@@ -96,7 +108,7 @@ public class Team {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", players=" + players +
-                ", match=" + match +
+                ", matches=" + matches +
                 ", points=" + points +
                 ", goalsScored=" + goalsScored +
                 ", goalsConceded=" + goalsConceded +

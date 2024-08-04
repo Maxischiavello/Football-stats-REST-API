@@ -3,19 +3,27 @@ package dev.maxischiavello.football_stats.result;
 import dev.maxischiavello.football_stats.game_actions.GameAction;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "results")
+@Table(name = "result")
 public class Result {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "local_team_scores")
     private Integer localTeamScores;
+
+    @Column(name = "visit_team_scores")
     private Integer visitTeamScores;
-    @OneToMany(mappedBy = "result")
-    private List<GameAction> gameActions;
+
+    @OneToMany
+    @JoinColumn(name = "result_id")
+    @Column(name = "game_actions")
+    private List<GameAction> gameActions = new ArrayList<>();
 
     public Result() {
     }

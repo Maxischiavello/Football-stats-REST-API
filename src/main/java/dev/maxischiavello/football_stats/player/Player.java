@@ -4,31 +4,40 @@ import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "players")
+@Table(name = "player")
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String surname;
+
+    private String firstname;
+
+    private String lastname;
+
     private Integer age;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
     private Integer goals;
+
     private Integer assists;
+
+    @Column(name = "yellow_cards")
     private Integer yellowCards;
+
+    @Column(name = "red_cards")
     private Integer redCards;
 
     public Player() {
     }
 
-    public Player(Integer id, String name, String surname, Integer age, Team team, Integer goals, Integer assists, Integer yellowCards, Integer redCards) {
+    public Player(Integer id, String firstname, String lastname, Integer age, Team team, Integer goals, Integer assists, Integer yellowCards, Integer redCards) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.age = age;
         this.team = team;
         this.goals = goals;
@@ -45,20 +54,20 @@ public class Player {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Integer getAge() {
@@ -113,8 +122,8 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", age=" + age +
                 ", team=" + team +
                 ", goals=" + goals +

@@ -4,7 +4,7 @@ import dev.maxischiavello.football_stats.player.Player;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "game_actions")
+@Table(name = "game_action")
 public class GameAction {
 
     @Id
@@ -14,7 +14,7 @@ public class GameAction {
     @Enumerated(EnumType.STRING)
     private Action action;
     @ManyToOne
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 
     public GameAction() {

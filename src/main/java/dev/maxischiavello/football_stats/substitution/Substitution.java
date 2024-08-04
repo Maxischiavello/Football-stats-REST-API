@@ -4,7 +4,7 @@ import dev.maxischiavello.football_stats.player.Player;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "substitutions")
+@Table(name = "substitution")
 public class Substitution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,8 @@ public class Substitution {
     private Player playerIn;
     private Integer minute;
 
-    public Substitution() {}
+    public Substitution() {
+    }
 
     public Substitution(Integer id, Player playerOut, Player playerIn, Integer minute) {
         this.id = id;

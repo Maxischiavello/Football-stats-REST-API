@@ -1,42 +1,40 @@
 package dev.maxischiavello.football_stats.match;
 
-import dev.maxischiavello.football_stats.player.Player;
 import dev.maxischiavello.football_stats.result.Result;
 import dev.maxischiavello.football_stats.substitution.Substitution;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "matches")
+@Table(name = "match")
 public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "result_id", referencedColumnName = "id")
     private Result result;
+
     @Temporal(TemporalType.DATE)
+    @Column(name = "match_date")
     private Date date;
-    @OneToMany
-    private List<Player> startingPlayers;
-    @OneToMany
-    private List<Player> substitutePlayers;
-    @OneToMany(mappedBy = "match")
-    private List<Substitution> substitutions;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "match_id")
+    private List<Substitution> substitutions = new ArrayList<>();
 
     public Match() {
     }
 
-    public Match(Integer id, Result result, Date date, List<Player> startingPlayers, List<Player> substitutePlayers, List<Substitution> substitutions) {
+    public Match(Integer id, Result result, Date date, List<Substitution> substitutions) {
         this.id = id;
         this.result = result;
         this.date = date;
-        this.startingPlayers = startingPlayers;
-        this.substitutePlayers = substitutePlayers;
         this.substitutions = substitutions;
     }
 
@@ -64,22 +62,6 @@ public class Match {
         this.date = date;
     }
 
-    public List<Player> getStartingPlayers() {
-        return startingPlayers;
-    }
-
-    public void setStartingPlayers(List<Player> startingPlayers) {
-        this.startingPlayers = startingPlayers;
-    }
-
-    public List<Player> getSubstitutePlayers() {
-        return substitutePlayers;
-    }
-
-    public void setSubstitutePlayers(List<Player> substitutePlayers) {
-        this.substitutePlayers = substitutePlayers;
-    }
-
     public List<Substitution> getSubstitutions() {
         return substitutions;
     }
@@ -94,8 +76,6 @@ public class Match {
                 "id=" + id +
                 ", result=" + result +
                 ", date=" + date +
-                ", startingPlayers=" + startingPlayers +
-                ", substitutePlayers=" + substitutePlayers +
                 ", substitutions=" + substitutions +
                 '}';
     }

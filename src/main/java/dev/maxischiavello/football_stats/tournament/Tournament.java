@@ -4,20 +4,23 @@ import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tournaments")
+@Table(name = "tournament")
 public class Tournament {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToMany
-    private List<Team> teams;
-    @OneToMany
-    private List<Match> matches;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "tournament_id")
+    private List<Team> teams = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "tournament_id")
+    private List<Match> matches = new ArrayList<>();
 
     public Tournament() {
     }
