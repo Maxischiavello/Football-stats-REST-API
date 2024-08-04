@@ -23,7 +23,7 @@ public class FootballStatsApplication {
      				class: \{ jdbc.getClass().getName() }
      				JDBC URL: \{ jdbc.getJdbcUrl() }
      				Username: \{ jdbc.getUsername() }
-     				Password: \{ jdbc.getPassword() }
+     				Password: ********
 					""" ;
 
             System.out.println(details);
