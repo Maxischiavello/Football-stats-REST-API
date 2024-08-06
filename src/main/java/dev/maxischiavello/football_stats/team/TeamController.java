@@ -1,5 +1,7 @@
 package dev.maxischiavello.football_stats.team;
 
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 public class TeamController {
     private final TeamService teamService;
 
+    @Autowired
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
@@ -27,8 +30,8 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeam(id));
     }
 
-    @PostMapping("/teams")
-    public ResponseEntity<Team> create(@RequestBody Team team) {
+    @PostMapping
+    public ResponseEntity<Team> create(@RequestBody @Valid Team team) {
         Team created = teamService.create(team);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
@@ -39,8 +42,8 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Team> updateStats(@PathVariable Integer id, @RequestBody TeamRequest teamRequest) {
-        Team updated = teamService.updateTeamStats(id, teamRequest);
+    public ResponseEntity<Team> updateStats(@PathVariable Integer id, @RequestBody @Valid TeamRequest teamRequest) {
+        Team updated = teamService.updateStats(id, teamRequest);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

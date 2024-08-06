@@ -23,18 +23,15 @@ public class TeamService {
     }
 
     Team create(Team team) {
-        if (team.getName() == null || team.getName().isEmpty()) {
-            throw new TeamBadRequestException("Team name must not be empty");
-        }
         return this.teamRepository.save(team);
     }
 
-    Team updateTeamStats(Integer id, TeamRequest teamRequest) {
+    Team updateStats(Integer id, TeamRequest teamRequest) {
         Team updated = this.teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
 
-        updated.setPoints(teamRequest.points());
-        updated.setGoalsScored(teamRequest.goalsScored());
-        updated.setGoalsConceded(teamRequest.goalsConceded());
+        updated.setPoints(updated.getPoints() + teamRequest.points());
+        updated.setGoalsScored(updated.getGoalsScored() + teamRequest.goalsScored());
+        updated.setGoalsConceded(updated.getGoalsConceded() + teamRequest.goalsConceded());
 
         return updated;
     }
