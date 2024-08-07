@@ -1,0 +1,31 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Boca Juniors",
+      "players": [],
+      "matches": [],
+      "points": 0,
+      "goalsScored": 0,
+      "goalsConceded": 0
+    },
+    {
+      "id": 2,
+      "name": "Real Madrid",
+      "players": [],
+      "matches": [],
+      "points": 0,
+      "goalsScored": 0,
+      "goalsConceded": 0
+    },
+    {
+      "id": 3,
+      "name": "Liverpool",
+      "players": [],
+      "matches": [],
+      "points": 0,
+      "goalsScored": 0,
+      "goalsConceded": 0
+    }
+  ]
+}
