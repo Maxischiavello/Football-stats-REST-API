@@ -1,0 +1,26 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "firstname": "Edinson",
+      "lastname": "Cavani",
+      "age": 37,
+      "team": { "id": 1 },
+      "goals": 0,
+      "assists": 0,
+      "yellowCards": 0,
+      "redCards": 0
+    },
+    {
+      "id": 2,
+      "firstname": "Miguel",
+      "lastname": "Merentiel",
+      "age": 28,
+      "team": { "id": 1 },
+      "goals": 0,
+      "assists": 0,
+      "yellowCards": 0,
+      "redCards": 0
+    }
+  ]
+}

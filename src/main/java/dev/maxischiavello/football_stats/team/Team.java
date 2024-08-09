@@ -1,5 +1,6 @@
 package dev.maxischiavello.football_stats.team;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.player.Player;
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Player> players = new ArrayList<>();
 
 

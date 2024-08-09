@@ -1,38 +1,40 @@
-package dev.maxischiavello.football_stats.team;
+package dev.maxischiavello.football_stats.player;
 
+import dev.maxischiavello.football_stats.team.Team;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.http.HttpHeaders;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/team")
-public class TeamController {
-    private final TeamService teamService;
+@RequestMapping("/player")
+public class PlayerController {
+
+    private final PlayerService playerService;
 
     @Autowired
-    public TeamController(TeamService teamService) {
-        this.teamService = teamService;
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Team>> getAll() {
-        return ResponseEntity.ok(teamService.getAll());
+    public ResponseEntity<List<Player>> getAll() {
+        return ResponseEntity.ok(playerService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Team> get(@PathVariable Integer id) {
-        return ResponseEntity.ok(teamService.getTeam(id));
+    public ResponseEntity<Player> get(@PathVariable Integer id) {
+        return ResponseEntity.ok(playerService.getPlayer(id));
     }
 
     @PostMapping
-    public ResponseEntity<Team> create(@RequestBody @Valid Team team) {
-        Team created = teamService.create(team);
+    public ResponseEntity<Player> create(@RequestBody @Valid Player player) {
+        Player created = playerService.create(player);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -42,8 +44,8 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Team> updateStats(@PathVariable Integer id, @RequestBody @Valid TeamStatsRequest teamStatsRequest) {
-        Team updated = teamService.updateStats(id, teamStatsRequest);
+    public ResponseEntity<Player> updateStats(@PathVariable Integer id, @RequestBody @Valid PlayerStatsRequest playerStatsRequest) {
+        Player updated = playerService.updatePlayerStats(id, playerStatsRequest);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -54,7 +56,8 @@ public class TeamController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        teamService.deleteTeam(id);
+        playerService.deletePlayer(id);
         return ResponseEntity.noContent().build();
     }
+
 }

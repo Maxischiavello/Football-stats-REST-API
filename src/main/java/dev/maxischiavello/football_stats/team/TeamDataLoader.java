@@ -5,12 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 @Component
+@Order(1)
 public class TeamDataLoader implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(TeamDataLoader.class);

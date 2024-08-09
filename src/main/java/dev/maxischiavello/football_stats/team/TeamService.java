@@ -26,12 +26,12 @@ public class TeamService {
         return this.teamRepository.save(team);
     }
 
-    Team updateStats(Integer id, TeamRequest teamRequest) {
+    Team updateStats(Integer id, TeamStatsRequest teamStatsRequest) {
         Team updated = this.teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
 
-        updated.setPoints(updated.getPoints() + teamRequest.points());
-        updated.setGoalsScored(updated.getGoalsScored() + teamRequest.goalsScored());
-        updated.setGoalsConceded(updated.getGoalsConceded() + teamRequest.goalsConceded());
+        updated.setPoints(updated.getPoints() + teamStatsRequest.points());
+        updated.setGoalsScored(updated.getGoalsScored() + teamStatsRequest.goalsScored());
+        updated.setGoalsConceded(updated.getGoalsConceded() + teamStatsRequest.goalsConceded());
 
         return updated;
     }
@@ -41,8 +41,6 @@ public class TeamService {
             teamRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new TeamNotFoundException(id);
-        } catch (Exception e) {
-            throw new TeamDeletionException("Failed to delete team with id: " + id, e);
         }
     }
 }

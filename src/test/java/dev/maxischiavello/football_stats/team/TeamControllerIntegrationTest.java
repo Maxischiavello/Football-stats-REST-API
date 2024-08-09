@@ -32,6 +32,7 @@ public class TeamControllerIntegrationTest {
     TestRestTemplate restTemplate;
 
     @Test
+    @DisplayName("should establish the connection")
     void connectionEstablished() {
         assertThat(postgres.isCreated()).isTrue();
         assertThat(postgres.isRunning()).isTrue();

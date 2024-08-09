@@ -157,13 +157,13 @@ public class TeamControllerTest {
     @DisplayName("should update team stats when given valid id")
     void update() throws Exception {
         Team updated = teams.get(0);
-        TeamRequest teamRequest = new TeamRequest(3, 4, 0);
-        when(teamService.updateStats(anyInt(), any(TeamRequest.class))).thenReturn(updated);
+        TeamStatsRequest teamStatsRequest = new TeamStatsRequest(3, 4, 0);
+        when(teamService.updateStats(anyInt(), any(TeamStatsRequest.class))).thenReturn(updated);
         String json = STR. """
                     {
-                            "points": \{ teamRequest.points() },
-                            "goalsScored": \{ teamRequest.goalsScored() },
-                            "goalsConceded": \{ teamRequest.goalsConceded() }
+                            "points": \{ teamStatsRequest.points() },
+                            "goalsScored": \{ teamStatsRequest.goalsScored() },
+                            "goalsConceded": \{ teamStatsRequest.goalsConceded() }
                     }
                 """ ;
 
@@ -176,12 +176,12 @@ public class TeamControllerTest {
     @Test
     @DisplayName("should not update team stats when request is invalid")
     void notUpdate() throws Exception {
-        TeamRequest teamRequest = new TeamRequest(null, 4, 0);
+        TeamStatsRequest teamStatsRequest = new TeamStatsRequest(null, 4, 0);
         String json = STR. """
                     {
-                            "points": \{ teamRequest.points() },
-                            "goalsScored": \{ teamRequest.goalsScored() },
-                            "goalsConceded": \{ teamRequest.goalsConceded() }
+                            "points": \{ teamStatsRequest.points() },
+                            "goalsScored": \{ teamStatsRequest.goalsScored() },
+                            "goalsConceded": \{ teamStatsRequest.goalsConceded() }
                     }
                 """ ;
 

@@ -1,7 +1,9 @@
 package dev.maxischiavello.football_stats.player;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "player")
@@ -11,14 +13,17 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "Player firstname must not be empty")
     private String firstname;
 
+    @NotBlank(message = "Player lastname must not be empty")
     private String lastname;
 
     private Integer age;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
 
     private Integer goals;
