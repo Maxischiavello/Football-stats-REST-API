@@ -21,7 +21,7 @@ public class Team {
     @NotBlank(message = "Team name must not be empty")
     private String name;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Player> players = new ArrayList<>();
 

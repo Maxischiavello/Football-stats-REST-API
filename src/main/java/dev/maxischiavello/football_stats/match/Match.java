@@ -18,7 +18,7 @@ public class Match {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "result_id", referencedColumnName = "id")
-    private Result result;
+    private Result result = new Result();
 
     @Temporal(TemporalType.DATE)
     @Column(name = "match_date")

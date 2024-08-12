@@ -1,7 +1,5 @@
 package dev.maxischiavello.football_stats.player;
 
-import dev.maxischiavello.football_stats.team.TeamDeletionException;
-import dev.maxischiavello.football_stats.team.TeamNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
