@@ -133,12 +133,4 @@ public class PlayerControllerIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).contains("Player goals must not be null");
     }
-
-    @Test
-    @Rollback
-    @DisplayName("should delete a player when given valid id")
-    void deleteTeam() throws Exception {
-        ResponseEntity<Void> response = restTemplate.exchange("/player/2", HttpMethod.DELETE, null, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-    }
 }

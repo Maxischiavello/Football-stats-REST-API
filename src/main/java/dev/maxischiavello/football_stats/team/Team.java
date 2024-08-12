@@ -1,5 +1,7 @@
 package dev.maxischiavello.football_stats.team;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.player.Player;
@@ -9,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "team")
@@ -26,8 +29,8 @@ public class Team {
     private List<Player> players = new ArrayList<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "team_id")
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Match> matches = new ArrayList<>();
 
     private Integer points;
@@ -118,5 +121,24 @@ public class Team {
                 ", goalsScored=" + goalsScored +
                 ", goalsConceded=" + goalsConceded +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return Objects.equals(id, team.id) &&
+                Objects.equals(name, team.name) &&
+                Objects.equals(players, team.players) &&
+                Objects.equals(matches, team.matches) &&
+                Objects.equals(points, team.points) &&
+                Objects.equals(goalsScored, team.goalsScored) &&
+                Objects.equals(goalsConceded, team.goalsConceded);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, players, matches, points, goalsScored, goalsConceded);
     }
 }

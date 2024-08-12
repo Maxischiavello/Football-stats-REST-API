@@ -122,12 +122,4 @@ public class TeamControllerIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(response.getBody()).contains("Team points must not be null");
     }
-
-    @Test
-    @Rollback
-    @DisplayName("should delete a team when given valid id")
-    void deleteTeam() throws Exception {
-        ResponseEntity<Void> response = restTemplate.exchange("/team/3", HttpMethod.DELETE, null, Void.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-    }
 }

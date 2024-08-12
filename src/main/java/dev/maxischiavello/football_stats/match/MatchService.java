@@ -34,12 +34,6 @@ public class MatchService {
         return match;
     }
 
-    Match setSubstitutions(Integer matchId, List<Substitution> substitutions) {
-        Match match = this.matchRepository.findById(matchId).orElseThrow(() -> new MatchNotFoundException(matchId));
-        match.setSubstitutions(substitutions);
-        return match;
-    }
-
     public void deleteMatch(Integer id) {
         try {
             matchRepository.deleteById(id);

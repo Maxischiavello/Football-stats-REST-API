@@ -1,10 +1,13 @@
 package dev.maxischiavello.football_stats.match;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.maxischiavello.football_stats.result.Result;
 import dev.maxischiavello.football_stats.substitution.Substitution;
+import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,26 +19,30 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "match_team",
+            joinColumns = @JoinColumn(name = "match_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
+    private List<Team> teams = new ArrayList<>();
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "result_id", referencedColumnName = "id")
     private Result result = new Result();
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "match_date")
     private Date date;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "match_id")
-    private List<Substitution> substitutions = new ArrayList<>();
 
     public Match() {
     }
 
-    public Match(Integer id, Result result, Date date, List<Substitution> substitutions) {
+    public Match(Integer id, List<Team> teams, Result result, Date date) {
         this.id = id;
+        this.teams = teams;
         this.result = result;
         this.date = date;
-        this.substitutions = substitutions;
     }
 
     public Integer getId() {
@@ -44,6 +51,14 @@ public class Match {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public Result getResult() {
@@ -62,21 +77,13 @@ public class Match {
         this.date = date;
     }
 
-    public List<Substitution> getSubstitutions() {
-        return substitutions;
-    }
-
-    public void setSubstitutions(List<Substitution> substitutions) {
-        this.substitutions = substitutions;
-    }
-
     @Override
     public String toString() {
         return "Match{" +
                 "id=" + id +
+                ", teams=" + teams +
                 ", result=" + result +
                 ", date=" + date +
-                ", substitutions=" + substitutions +
                 '}';
     }
 }

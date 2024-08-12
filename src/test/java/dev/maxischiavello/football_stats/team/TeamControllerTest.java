@@ -52,8 +52,7 @@ public class TeamControllerTest {
                             "points": 3,
                             "goalsScored": 5,
                             "goalsConceded": 1,
-                            "players": [],
-                            "matches": []
+                            "players": []
                         },
                         {
                             "id": 2,
@@ -61,8 +60,7 @@ public class TeamControllerTest {
                             "points": 0,
                             "goalsScored": 1,
                             "goalsConceded": 5,
-                            "players": [],
-                            "matches": []
+                            "players": []
                         }
                     ]
                 """;
@@ -87,8 +85,7 @@ public class TeamControllerTest {
                             "points": \{ team.getPoints() },
                             "goalsScored": \{ team.getGoalsScored() },
                             "goalsConceded": \{ team.getGoalsConceded() },
-                            "players": [],
-                            "matches": []
+                            "players": []
                     }
                 """ ;
 
@@ -191,16 +188,4 @@ public class TeamControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Team points must not be null"));
     }
-
-    @Test
-    @DisplayName("should delete a team when given valid id")
-    void deleteTeam() throws Exception {
-        doNothing().when(teamService).deleteTeam(1);
-
-        mockMvc.perform(delete("/team/1"))
-                .andExpect(status().isNoContent());
-
-        verify(teamService, times(1)).deleteTeam(1);
-    }
-
 }

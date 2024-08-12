@@ -1,6 +1,7 @@
 package dev.maxischiavello.football_stats.result;
 
 import dev.maxischiavello.football_stats.game_actions.GameAction;
+import dev.maxischiavello.football_stats.substitution.Substitution;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -25,14 +26,19 @@ public class Result {
     @Column(name = "game_actions")
     private List<GameAction> gameActions = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name = "result_id")
+    private List<Substitution> substitutions = new ArrayList<>();
+
     public Result() {
     }
 
-    public Result(Integer id, Integer localTeamScores, Integer visitTeamScores, List<GameAction> gameActions) {
+    public Result(Integer id, Integer localTeamScores, Integer visitTeamScores, List<GameAction> gameActions, List<Substitution> substitutions) {
         this.id = id;
         this.localTeamScores = localTeamScores;
         this.visitTeamScores = visitTeamScores;
         this.gameActions = gameActions;
+        this.substitutions = substitutions;
     }
 
     public Integer getId() {
@@ -67,6 +73,14 @@ public class Result {
         this.gameActions = gameActions;
     }
 
+    public List<Substitution> getSubstitutions() {
+        return substitutions;
+    }
+
+    public void setSubstitutions(List<Substitution> substitutions) {
+        this.substitutions = substitutions;
+    }
+
     @Override
     public String toString() {
         return "Result{" +
@@ -74,6 +88,7 @@ public class Result {
                 ", localTeamScores=" + localTeamScores +
                 ", visitTeamScores=" + visitTeamScores +
                 ", gameActions=" + gameActions +
+                ", substitutions=" + substitutions +
                 '}';
     }
 }

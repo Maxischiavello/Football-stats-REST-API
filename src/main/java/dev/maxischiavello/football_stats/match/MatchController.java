@@ -55,17 +55,6 @@ public class MatchController {
         return new ResponseEntity<>(updated, headers, HttpStatus.OK);
     }
 
-    @PutMapping("/update_substitutions/{id}")
-    public ResponseEntity<Match> updateMatchSubstitutions(@PathVariable Integer matchId, @RequestBody List<Substitution> substitutions) {
-        Match updated = matchService.setSubstitutions(matchId, substitutions);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(matchId)
-                .toUri());
-        return new ResponseEntity<>(updated, headers, HttpStatus.OK);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMatch(@PathVariable Integer id) {
         matchService.deleteMatch(id);
