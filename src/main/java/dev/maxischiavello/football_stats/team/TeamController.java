@@ -51,10 +51,4 @@ public class TeamController {
                 .toUri());
         return new ResponseEntity<>(updated, headers, HttpStatus.OK);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        teamService.deleteTeam(id);
-        return ResponseEntity.noContent().build();
-    }
 }

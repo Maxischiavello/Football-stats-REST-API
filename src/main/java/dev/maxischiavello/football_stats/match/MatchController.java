@@ -45,7 +45,7 @@ public class MatchController {
     }
 
     @PutMapping("/update_result/{id}")
-    public ResponseEntity<Match> updateMatchResult(@PathVariable Integer matchId, @RequestBody Result result) {
+    public ResponseEntity<Match> updateMatchResult(@PathVariable Integer matchId, @RequestBody @Valid Result result) {
         Match updated = matchService.setResult(matchId, result);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
@@ -53,11 +53,5 @@ public class MatchController {
                 .buildAndExpand(matchId)
                 .toUri());
         return new ResponseEntity<>(updated, headers, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMatch(@PathVariable Integer id) {
-        matchService.deleteMatch(id);
-        return ResponseEntity.noContent().build();
     }
 }

@@ -1,14 +1,12 @@
 package dev.maxischiavello.football_stats.match;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.maxischiavello.football_stats.result.Result;
-import dev.maxischiavello.football_stats.substitution.Substitution;
 import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,20 +23,22 @@ public class Match {
             joinColumns = @JoinColumn(name = "match_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
+    @NotNull(message = "Teams must not be null")
     private List<Team> teams = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "result_id", referencedColumnName = "id")
+    @NotNull(message = "Result must not be null")
     private Result result = new Result();
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "match_date")
-    private Date date;
+    @NotNull(message = "date must not be null")
+    private LocalDateTime date;
 
     public Match() {
     }
 
-    public Match(Integer id, List<Team> teams, Result result, Date date) {
+    public Match(Integer id, List<Team> teams, Result result, LocalDateTime date) {
         this.id = id;
         this.teams = teams;
         this.result = result;
@@ -69,11 +69,11 @@ public class Match {
         this.result = result;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

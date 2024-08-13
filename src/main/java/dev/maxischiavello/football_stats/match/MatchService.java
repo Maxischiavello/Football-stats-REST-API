@@ -33,12 +33,4 @@ public class MatchService {
         match.setResult(result);
         return match;
     }
-
-    public void deleteMatch(Integer id) {
-        try {
-            matchRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new MatchNotFoundException(id);
-        }
-    }
 }

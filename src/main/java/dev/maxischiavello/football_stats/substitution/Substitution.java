@@ -2,6 +2,7 @@ package dev.maxischiavello.football_stats.substitution;
 
 import dev.maxischiavello.football_stats.player.Player;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "substitution")
@@ -9,12 +10,18 @@ public class Substitution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "player_out_id")
+    @NotNull
     private Player playerOut;
+
     @ManyToOne
     @JoinColumn(name = "player_in_id")
+    @NotNull
     private Player playerIn;
+
+    @NotNull
     private Integer minute;
 
     public Substitution() {
