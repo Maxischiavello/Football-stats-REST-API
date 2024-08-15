@@ -1,0 +1,28 @@
+{
+  "substitutions": [
+    {
+      "id": 1,
+      "playerOut": { "id": 1},
+      "playerIn": { "id": 14},
+      "minute": 75
+    },
+    {
+      "id": 2,
+      "playerOut": { "id": 19},
+      "playerIn": { "id": 33},
+      "minute": 82
+    },
+    {
+      "id": 3,
+      "playerOut": { "id": 37},
+      "playerIn": { "id": 49},
+      "minute": 79
+    },
+    {
+      "id": 4,
+      "playerOut": { "id": 50},
+      "playerIn": { "id": 65},
+      "minute": 73
+    }
+  ]
+}
