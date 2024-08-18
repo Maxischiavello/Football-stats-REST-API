@@ -82,7 +82,7 @@ public class MatchControllerIntegrationTest {
     @Test
     @DisplayName("should not create a match when request is invalid")
     void notCreate() throws Exception {
-        Match match = new Match(3, null, new Result(), LocalDateTime.parse("2024-08-25T15:00:00"));
+        Match match = new Match(3, null, null, null);
         ResponseEntity<String> response = restTemplate.exchange("/match", HttpMethod.POST, new HttpEntity<>(match), String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -99,7 +99,7 @@ public class MatchControllerIntegrationTest {
         Match updated = new Match(
                 existing.getId(),
                 existing.getTeams(),
-                new Result(1, 2, 3, new ArrayList<>(), new ArrayList<>()),
+                new Result(1, 2, 3, existing, new ArrayList<>(), new ArrayList<>()),
                 existing.getDate()
         );
 

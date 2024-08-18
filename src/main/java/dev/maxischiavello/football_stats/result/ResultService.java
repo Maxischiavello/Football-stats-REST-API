@@ -25,10 +25,4 @@ public class ResultService {
     Result create(Result result) {
         return this.resultRepository.save(result);
     }
-
-    Result setSubstitutions(Integer resultId, List<Substitution> substitutions) {
-        Result result = this.resultRepository.findById(resultId).orElseThrow(() -> new ResultNotFoundException(resultId));
-        result.setSubstitutions(substitutions);
-        return result;
-    }
 }

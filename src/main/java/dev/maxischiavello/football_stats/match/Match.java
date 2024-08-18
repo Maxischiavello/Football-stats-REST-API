@@ -1,5 +1,7 @@
 package dev.maxischiavello.football_stats.match;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.maxischiavello.football_stats.result.Result;
 import dev.maxischiavello.football_stats.team.Team;
 import jakarta.persistence.*;
@@ -24,12 +26,13 @@ public class Match {
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
     @NotNull(message = "Teams must not be null")
+    @JsonIgnore
     private List<Team> teams = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "result_id", referencedColumnName = "id")
-    @NotNull(message = "Result must not be null")
-    private Result result = new Result();
+    @JsonManagedReference
+    private Result result;
 
     @Column(name = "match_date")
     @NotNull(message = "date must not be null")

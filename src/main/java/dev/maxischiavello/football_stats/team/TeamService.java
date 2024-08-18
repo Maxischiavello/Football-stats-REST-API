@@ -35,12 +35,4 @@ public class TeamService {
 
         return updated;
     }
-
-    public void deleteTeam(Integer id) {
-        try {
-            teamRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new TeamNotFoundException(id);
-        }
-    }
 }

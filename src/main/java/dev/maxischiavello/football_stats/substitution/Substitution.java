@@ -1,6 +1,8 @@
 package dev.maxischiavello.football_stats.substitution;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.maxischiavello.football_stats.player.Player;
+import dev.maxischiavello.football_stats.result.Result;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,25 +15,28 @@ public class Substitution {
 
     @ManyToOne
     @JoinColumn(name = "player_out_id")
-    @NotNull
     private Player playerOut;
 
     @ManyToOne
     @JoinColumn(name = "player_in_id")
-    @NotNull
     private Player playerIn;
 
-    @NotNull
     private Integer minute;
+
+    @ManyToOne
+    @JoinColumn(name = "result_id")
+    @JsonBackReference
+    private Result result;
 
     public Substitution() {
     }
 
-    public Substitution(Integer id, Player playerOut, Player playerIn, Integer minute) {
+    public Substitution(Integer id, Player playerOut, Player playerIn, Integer minute, Result result) {
         this.id = id;
         this.playerOut = playerOut;
         this.playerIn = playerIn;
         this.minute = minute;
+        this.result = result;
     }
 
     public Integer getId() {
@@ -66,6 +71,14 @@ public class Substitution {
         this.minute = minute;
     }
 
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "Substitution{" +
@@ -73,6 +86,7 @@ public class Substitution {
                 ", playerOut=" + playerOut +
                 ", playerIn=" + playerIn +
                 ", minute=" + minute +
+                ", result=" + result +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Component
-@Order(4)
+@Order(6)
 public class SubstitutionDataLoader implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(SubstitutionDataLoader.class);

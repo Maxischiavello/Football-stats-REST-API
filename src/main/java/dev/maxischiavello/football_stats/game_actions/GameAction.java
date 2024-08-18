@@ -1,6 +1,8 @@
 package dev.maxischiavello.football_stats.game_actions;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.maxischiavello.football_stats.player.Player;
+import dev.maxischiavello.football_stats.result.Result;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,17 +16,23 @@ public class GameAction {
     @Enumerated(EnumType.STRING)
     private Action action;
     @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @JoinColumn(name = "player_id")
     private Player player;
+
+    @ManyToOne
+    @JoinColumn(name = "result_id")
+    @JsonBackReference
+    private Result result;
 
     public GameAction() {
     }
 
-    public GameAction(Integer id, Integer minute, Action action, Player player) {
+    public GameAction(Integer id, Integer minute, Action action, Player player, Result result) {
         this.id = id;
         this.minute = minute;
         this.action = action;
         this.player = player;
+        this.result = result;
     }
 
     public Integer getId() {
@@ -59,6 +67,14 @@ public class GameAction {
         this.player = player;
     }
 
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "GameAction{" +
@@ -66,6 +82,7 @@ public class GameAction {
                 ", minute=" + minute +
                 ", action=" + action +
                 ", player=" + player +
+                ", result=" + result +
                 '}';
     }
 }

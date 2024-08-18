@@ -24,7 +24,7 @@ public class Team {
     @NotBlank(message = "Team name must not be empty")
     private String name;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Player> players = new ArrayList<>();
 
@@ -40,6 +40,9 @@ public class Team {
 
     @Column(name = "goals_conceded")
     private Integer goalsConceded;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
     public Team() {
     }
@@ -110,6 +113,14 @@ public class Team {
         this.goalsConceded = goalsConceded;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
@@ -121,24 +132,5 @@ public class Team {
                 ", goalsScored=" + goalsScored +
                 ", goalsConceded=" + goalsConceded +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return Objects.equals(id, team.id) &&
-                Objects.equals(name, team.name) &&
-                Objects.equals(players, team.players) &&
-                Objects.equals(matches, team.matches) &&
-                Objects.equals(points, team.points) &&
-                Objects.equals(goalsScored, team.goalsScored) &&
-                Objects.equals(goalsConceded, team.goalsConceded);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, players, matches, points, goalsScored, goalsConceded);
     }
 }

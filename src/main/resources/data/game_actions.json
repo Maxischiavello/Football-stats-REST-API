@@ -1,0 +1,58 @@
+{
+  "gameActions": [
+    {
+      "id": 1,
+      "minute": 35,
+      "action": "GOAL",
+      "player": {
+        "id": 1
+      },
+      "result": { "id": 1 }
+    },
+    {
+      "id": 2,
+      "minute": 35,
+      "action": "ASSIST",
+      "player": {
+        "id": 2
+      },
+      "result": { "id": 1 }
+    },
+    {
+      "id": 3,
+      "minute": 60,
+      "action": "GOAL",
+      "player": {
+        "id": 2
+      },
+      "result": { "id": 1 }
+    },
+    {
+      "id": 4,
+      "minute": 60,
+      "action": "ASSIST",
+      "player": {
+        "id": 1
+      },
+      "result": { "id": 1 }
+    },
+    {
+      "id": 5,
+      "minute": 70,
+      "action": "GOAL",
+      "player": {
+        "id": 18
+      },
+      "result": { "id": 1 }
+    },
+    {
+      "id": 6,
+      "minute": 15,
+      "action": "GOAL",
+      "player": {
+        "id": 34
+      },
+      "result": { "id": 2 }
+    }
+  ]
+}

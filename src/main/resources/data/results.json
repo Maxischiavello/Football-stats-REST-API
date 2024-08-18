@@ -3,30 +3,12 @@
     {
       "id": 1,
       "localTeamScores": 2,
-      "visitTeamScores": 1,
-      "gameActions": [],
-      "substitutions": [
-        {
-          "id": 1
-        },
-        {
-          "id": 2
-        }
-      ]
+      "visitTeamScores": 1
     },
     {
       "id": 2,
       "localTeamScores": 1,
-      "visitTeamScores": 3,
-      "gameActions": [],
-      "substitutions": [
-        {
-          "id": 3
-        },
-        {
-          "id": 4
-        }
-      ]
+      "visitTeamScores": 0
     }
   ]
 }

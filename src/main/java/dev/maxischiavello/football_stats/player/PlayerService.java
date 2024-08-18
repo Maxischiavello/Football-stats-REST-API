@@ -36,12 +36,4 @@ public class PlayerService {
 
         return updated;
     }
-
-    public void deletePlayer(Integer id) {
-        try {
-            playerRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new PlayerNotFoundException(id);
-        }
-    }
 }

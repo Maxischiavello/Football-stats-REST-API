@@ -36,6 +36,9 @@ public class Player {
     @Column(name = "red_cards")
     private Integer redCards;
 
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     public Player() {
     }
 
@@ -121,6 +124,14 @@ public class Player {
 
     public void setRedCards(Integer redCards) {
         this.redCards = redCards;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     @Override
