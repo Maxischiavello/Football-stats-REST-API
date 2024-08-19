@@ -7,6 +7,7 @@ import dev.maxischiavello.football_stats.game_actions.GameAction;
 import dev.maxischiavello.football_stats.match.Match;
 import dev.maxischiavello.football_stats.substitution.Substitution;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,11 @@ public class Result {
     private Integer id;
 
     @Column(name = "local_team_scores")
+    @NotNull(message = "Local team scores must not be null")
     private Integer localTeamScores;
 
     @Column(name = "visit_team_scores")
+    @NotNull(message = "Visit team scores must not be null")
     private Integer visitTeamScores;
 
     @OneToOne(mappedBy = "result", fetch = FetchType.EAGER)

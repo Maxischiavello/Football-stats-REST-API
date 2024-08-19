@@ -44,12 +44,12 @@ public class MatchController {
         return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update_result/{id}")
+    @PutMapping("/update_result/{matchId}")
     public ResponseEntity<Match> updateMatchResult(@PathVariable Integer matchId, @RequestBody @Valid Result result) {
         Match updated = matchService.setResult(matchId, result);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+                .path("/{matchId}")
                 .buildAndExpand(matchId)
                 .toUri());
         return new ResponseEntity<>(updated, headers, HttpStatus.OK);

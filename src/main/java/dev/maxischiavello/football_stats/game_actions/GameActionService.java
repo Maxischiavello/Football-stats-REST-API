@@ -21,4 +21,7 @@ public class GameActionService {
         return gameActionRepository.findById(id).orElseThrow(() -> new GameActionNotFoundException(id));
     }
 
+    GameAction create(GameAction gameAction) {
+        return gameActionRepository.save(gameAction);
+    }
 }

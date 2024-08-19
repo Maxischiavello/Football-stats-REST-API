@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ResultExceptionHandler {
 
-    @ExceptionHandler(SubstitutionNotFoundException.class)
-    public ResponseEntity<String> handlePlayerNotFoundException(SubstitutionNotFoundException ex) {
+    @ExceptionHandler(ResultNotFoundException.class)
+    public ResponseEntity<String> handlePlayerNotFoundException(ResultNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

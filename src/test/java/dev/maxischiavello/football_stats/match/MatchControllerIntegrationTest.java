@@ -1,7 +1,9 @@
 package dev.maxischiavello.football_stats.match;
 
 
+import dev.maxischiavello.football_stats.game_actions.GameAction;
 import dev.maxischiavello.football_stats.result.Result;
+import dev.maxischiavello.football_stats.substitution.Substitution;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class MatchControllerIntegrationTest {
 
     @Test
     @DisplayName("should find a match when given valid id")
-    void getMatchValidId() {
+    void getMatchWithValidId() {
         ResponseEntity<Match> response = restTemplate.exchange("/match/1", HttpMethod.GET, null, Match.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
@@ -62,7 +64,7 @@ public class MatchControllerIntegrationTest {
 
     @Test
     @DisplayName("should not find a match when given invalid id")
-    void getPlayerInvalidId() throws Exception {
+    void getResultWithInvalidId() throws Exception {
         ResponseEntity<String> response = restTemplate.exchange("/match/999", HttpMethod.GET, null, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
@@ -71,7 +73,8 @@ public class MatchControllerIntegrationTest {
     @Rollback
     @DisplayName("should create a match")
     void create() throws Exception {
-        Match match = new Match(3, new ArrayList<>(), new Result(), LocalDateTime.parse("2024-08-25T15:00:00"));
+        Result result = new Result(3, 4, 2, new Match(), new ArrayList<GameAction>(), new ArrayList<Substitution>());
+        Match match = new Match(3, new ArrayList<>(), result, LocalDateTime.parse("2024-08-25T15:00:00"));
         ResponseEntity<Match> response = restTemplate.exchange("/match", HttpMethod.POST, new HttpEntity<Match>(match), Match.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isNotNull();
@@ -111,27 +114,25 @@ public class MatchControllerIntegrationTest {
     }
 
 //    REALIZAR CUANDO HAYA RESULTADOS CARGADOS EN BD
-//    @Test
-//    @DisplayName("should not update match result when request is invalid")
-//    void notUpdate() throws Exception {
-//        String json = """
-//                    {
-//                            "id": 1,
-//                            "localTeamScores": null,
-//                            "visitTeamScores": 2,
-//                            "gameActions": [],
-//                            "substitutions": []
-//                    }
-//                """;
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<String> request = new HttpEntity<>(json, headers);
-//
-//        // Send the PUT request and capture the response
-//        ResponseEntity<String> response = restTemplate.exchange("/match/update_result/1", HttpMethod.PUT, request, String.class);
-//
-//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-//        assertThat(response.getBody()).contains("Local team scores must not be null");
-//    }
+    @Test
+    @DisplayName("should not update match result when request is invalid")
+    void notUpdate() throws Exception {
+        String json = """
+                    {
+                            "id": 1,
+                            "localTeamScores": null,
+                            "visitTeamScores": 2
+                    }
+                """;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>(json, headers);
+
+        // Send the PUT request and capture the response
+        ResponseEntity<String> response = restTemplate.exchange("/match/update_result/1", HttpMethod.PUT, request, String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody()).contains("Local team scores must not be null");
+    }
 }
