@@ -91,7 +91,7 @@ public class ResultControllerIntegrationTest {
     @DisplayName("should not create a result when request is invalid")
     void notCreate() throws Exception {
         Result result = new Result(3, null, null, null, null, null);
-        ResponseEntity<String> response = restTemplate.exchange("/match", HttpMethod.POST, new HttpEntity<>(result), String.class);
+        ResponseEntity<String> response = restTemplate.exchange("/result", HttpMethod.POST, new HttpEntity<>(result), String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }

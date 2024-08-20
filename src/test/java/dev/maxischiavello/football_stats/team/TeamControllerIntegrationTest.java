@@ -47,7 +47,7 @@ public class TeamControllerIntegrationTest {
 
     @Test
     @DisplayName("should find a team when given valid id")
-    void getTeamValidId() {
+    void getTeamWithValidId() {
         ResponseEntity<Team> response = restTemplate.exchange("/team/1", HttpMethod.GET, null, Team.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         //assertThat(response.getBody()).isNotNull();
@@ -59,7 +59,7 @@ public class TeamControllerIntegrationTest {
 
     @Test
     @DisplayName("should not find a team when given invalid id")
-    void getTeamInvalidId() throws Exception {
+    void getTeamWithInvalidId() throws Exception {
         ResponseEntity<String> response = restTemplate.exchange("/team/999", HttpMethod.GET, null, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }

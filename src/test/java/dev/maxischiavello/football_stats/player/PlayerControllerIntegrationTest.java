@@ -47,7 +47,7 @@ public class PlayerControllerIntegrationTest {
 
     @Test
     @DisplayName("should find a player when given valid id")
-    void getPlayerValidId() {
+    void getPlayerWithValidId() {
         ResponseEntity<Player> response = restTemplate.exchange("/player/1", HttpMethod.GET, null, Player.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
@@ -59,7 +59,7 @@ public class PlayerControllerIntegrationTest {
 
     @Test
     @DisplayName("should not find a player when given invalid id")
-    void getPlayerInvalidId() throws Exception {
+    void getPlayerWithInvalidId() throws Exception {
         ResponseEntity<String> response = restTemplate.exchange("/player/999", HttpMethod.GET, null, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }

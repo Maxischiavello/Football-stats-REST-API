@@ -15,12 +15,15 @@ public class Substitution {
 
     @ManyToOne
     @JoinColumn(name = "player_out_id")
+    @NotNull(message = "Player out must not be null")
     private Player playerOut;
 
     @ManyToOne
     @JoinColumn(name = "player_in_id")
+    @NotNull(message = "Player in must not be null")
     private Player playerIn;
 
+    @NotNull(message = "Minute must not be null")
     private Integer minute;
 
     @ManyToOne

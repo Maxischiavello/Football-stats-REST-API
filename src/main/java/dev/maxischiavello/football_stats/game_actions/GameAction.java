@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.maxischiavello.football_stats.player.Player;
 import dev.maxischiavello.football_stats.result.Result;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "game_action")
@@ -12,8 +13,10 @@ public class GameAction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "Minute must not be null")
     private Integer minute;
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Action must not be null")
     private Action action;
     @ManyToOne
     @JoinColumn(name = "player_id")

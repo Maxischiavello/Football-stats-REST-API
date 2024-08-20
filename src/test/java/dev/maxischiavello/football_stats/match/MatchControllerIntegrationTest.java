@@ -64,7 +64,7 @@ public class MatchControllerIntegrationTest {
 
     @Test
     @DisplayName("should not find a match when given invalid id")
-    void getResultWithInvalidId() throws Exception {
+    void getMatchWithInvalidId() throws Exception {
         ResponseEntity<String> response = restTemplate.exchange("/match/999", HttpMethod.GET, null, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
@@ -113,7 +113,6 @@ public class MatchControllerIntegrationTest {
         assertThat(updated.getResult().getVisitTeamScores()).isEqualTo(3);
     }
 
-//    REALIZAR CUANDO HAYA RESULTADOS CARGADOS EN BD
     @Test
     @DisplayName("should not update match result when request is invalid")
     void notUpdate() throws Exception {
